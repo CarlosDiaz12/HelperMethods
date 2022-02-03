@@ -19,5 +19,22 @@ namespace HelperMethods.Infrastructure
             }
             return new MvcHtmlString(tag.ToString());
         }
+
+        /*
+         * --   INSECURE
+          public static MvcHtmlString DisplayMessage(this HtmlHelper html, string msg)
+        {
+            string result = String.Format("This is the message: <p>{0}</p> ", msg);
+            return new MvcHtmlString(result);
+        }
+         
+         */
+
+        public static MvcHtmlString DisplayMessage(this HtmlHelper html, string msg)
+        {
+            string encodedMessage = html.Encode(msg);
+            string result = String.Format("This is the message: <p>{0}</p>", encodedMessage);
+            return new MvcHtmlString(result);
+        }
     }
 }
