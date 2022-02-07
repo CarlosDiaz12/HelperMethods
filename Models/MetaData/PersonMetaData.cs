@@ -22,5 +22,7 @@ namespace HelperMethods.Models
         public DateTime BirthDate { get; set; }
         [Display(Name = "Approved")]
         public bool IsApproved { get; set; }
+        [UIHint("Enum")]
+        public Role Role { get; set; }
     }
 }
