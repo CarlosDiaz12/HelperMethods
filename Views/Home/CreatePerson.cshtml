@@ -5,32 +5,12 @@
     Html.EnableClientValidation(false);
 }
 
-<h2>CreatePerson</h2>
+<h2>CreatePerson: @Html.LabelForModel()</h2>
 
 
 @using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
 {
-    <div class="dataElem">
-        <label>PersonId</label>
-        @Html.EditorFor(x => x.PersonId)
-    </div>
-    <div class="dataElem">
-        <label>First Name</label>
-        @Html.EditorFor(x => x.FirstName)
-    </div>
-    <div class="dataElem">
-        <label>Last Name</label>
-        @Html.EditorFor(x => x.LastName)
-    </div>
-    <div class="dataElem">
-        <label>Role</label>
-        @Html.EditorFor(m => m.Role)
-    </div>
-
-    <div class="dataElem">
-        <label>Birth Date</label>
-        @Html.EditorFor(m => m.BirthDate)
-    </div>
+   @Html.EditorForModel()
     <input type="submit" value="Submit" />
 }
 
