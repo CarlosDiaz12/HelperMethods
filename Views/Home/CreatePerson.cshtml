@@ -7,20 +7,27 @@
 <h2>CreatePerson</h2>
 
 
-    @using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
-    {
-        <div class="dataElem">
-            <label>PersonId</label>
-            @Html.TextBox("personId", @Model.PersonId)
-        </div>
-        <div class="dataElem">
-            <label>First Name</label>
-            @Html.TextBox("firstName", @Model.FirstName)
-        </div>
-        <div class="dataElem">
-            <label>Last Name</label>
-            @Html.TextBox("firstName", @Model.LastName)
-        </div>
-        <input type="submit" value="Submit" />
-    }
+@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+{
+    <div class="dataElem">
+        <label>PersonId</label>
+        @Html.TextBoxFor(x => x.PersonId)
+    </div>
+    <div class="dataElem">
+        <label>First Name</label>
+        @Html.TextBoxFor(x => x.FirstName)
+    </div>
+    <div class="dataElem">
+        <label>Last Name</label>
+        @Html.TextBoxFor(x => x.LastName)
+    </div>
+    <div class="dataElem">
+        <label>Role</label>
+        @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))
+    </div>
+    <input type="submit" value="Submit" />
+}
+
+@Html.DropDownList("myList", new SelectList(new[] { "A", "B" }), "Choose")
+@Html.ListBox("myList", new MultiSelectList(new[] { "A", "B" }))
 
