@@ -6,19 +6,24 @@
 
 <h2>CreatePerson</h2>
 
-<form action="/Home/CreatePerson" method="post">
-    <div class="dataElem">
-        <label>PersonId</label>
-        <input name="personId" value="@Model.PersonId" />
-    </div>
-    <div class="dataElem">
-        <label>First Name</label>
-        <input name="FirstName" value="@Model.FirstName" />
-    </div>
-    <div class="dataElem">
-        <label>Last Name</label>
-        <input name="lastName" value="@Model.LastName" />
-    </div>
-    <input type="submit" value="Submit" />
-</form>
+@using (Html.BeginRouteForm("FormRoute", new { }, FormMethod.Post,
+new { @class = "personClass", data_formType = "person" }))
+{ }
+
+    @using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+    {
+        <div class="dataElem">
+            <label>PersonId</label>
+            <input name="personId" value="@Model.PersonId" />
+        </div>
+        <div class="dataElem">
+            <label>First Name</label>
+            <input name="FirstName" value="@Model.FirstName" />
+        </div>
+        <div class="dataElem">
+            <label>Last Name</label>
+            <input name="lastName" value="@Model.LastName" />
+        </div>
+        <input type="submit" value="Submit" />
+    }
 
