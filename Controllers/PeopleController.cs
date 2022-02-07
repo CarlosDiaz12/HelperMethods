@@ -19,8 +19,8 @@ namespace HelperMethods.Controllers
         {
             return View();
         }
-
-        private IEnumerable<Person> GetData(string selectedRole)
+        // Creating a Single Action Method
+        public ActionResult GetPeopleData(string selectedRole = "All")
         {
             IEnumerable<Person> data = personData;
             if (selectedRole != "All")
@@ -28,23 +28,19 @@ namespace HelperMethods.Controllers
                 Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
                 data = personData.Where(p => p.Role == selected);
             }
-            return data;
-        }
-
-        public JsonResult GetPeopleDataJson(string selectedRole = "All")
-        {
-            // Preparing Data Objects for JSON Encoding
-            var data = GetData(selectedRole).Select(p => new {
-                FirstName = p.FirstName,
-                LastName = p.LastName,
-                Role = Enum.GetName(typeof(Role), p.Role)
-            });
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-        public PartialViewResult GetPeopleData(string selectedRole = "All")
-        {
-            return PartialView(GetData(selectedRole));
+            if (Request.IsAjaxRequest())
+            {
+                var formattedData = data.Select(p => new {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    Role = Enum.GetName(typeof(Role), p.Role)
+                });
+                return Json(formattedData, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return PartialView(data);
+            }
         }
 
         public ActionResult GetPeople(string selectedRole = "All")

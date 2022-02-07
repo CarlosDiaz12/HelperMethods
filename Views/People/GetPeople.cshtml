@@ -58,7 +58,7 @@
                 new { selectedRole = role },
                 new AjaxOptions
                 {
-                    Url = Url.Action("GetPeopleDataJson", new { selectedRole = role }),
+                    Url = Url.Action("GetPeopleData", new { selectedRole = role }),
                     OnSuccess = "processData",
                 })
         </div>
