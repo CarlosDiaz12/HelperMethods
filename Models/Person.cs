@@ -8,24 +8,14 @@ using System.Web.Mvc;
 
 namespace HelperMethods.Models
 {
-    public class Person
+    [MetadataType(typeof(PersonMetaData))]
+    public partial class Person
     {
-        /*
-         * EXCLUDE PROPERTY FROM SCAFFOLDING
-        [ScaffoldColumn(false)]
-        */
-        [HiddenInput(DisplayValue = false)]
         public int PersonId { get; set; }
-        [DisplayName("First")]
         public string FirstName { get; set; }
-        [DisplayName("Last")]
-        [UIHint("MultilineText")]
         public string LastName { get; set; }
-        [DisplayName("Birth Date")]
-        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public Address HomeAddress { get; set; }
-        [DisplayName("Approved")]
         public bool IsApproved { get; set; }
         public Role Role { get; set; }
     }
