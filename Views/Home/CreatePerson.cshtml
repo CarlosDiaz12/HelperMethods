@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "CreatePerson";
     Layout = "/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation(false);
 }
 
 <h2>CreatePerson</h2>
@@ -11,23 +12,26 @@
 {
     <div class="dataElem">
         <label>PersonId</label>
-        @Html.TextBoxFor(x => x.PersonId)
+        @Html.EditorFor(x => x.PersonId)
     </div>
     <div class="dataElem">
         <label>First Name</label>
-        @Html.TextBoxFor(x => x.FirstName)
+        @Html.EditorFor(x => x.FirstName)
     </div>
     <div class="dataElem">
         <label>Last Name</label>
-        @Html.TextBoxFor(x => x.LastName)
+        @Html.EditorFor(x => x.LastName)
     </div>
     <div class="dataElem">
         <label>Role</label>
-        @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))
+        @Html.EditorFor(m => m.Role)
+    </div>
+
+    <div class="dataElem">
+        <label>Birth Date</label>
+        @Html.EditorFor(m => m.BirthDate)
     </div>
     <input type="submit" value="Submit" />
 }
 
-@Html.DropDownList("myList", new SelectList(new[] { "A", "B" }), "Choose")
-@Html.ListBox("myList", new MultiSelectList(new[] { "A", "B" }))
 
