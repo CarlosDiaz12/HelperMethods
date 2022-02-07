@@ -12,6 +12,25 @@
     };
 }
 
+@*Using the Ajax Callbacks*@
+<script type="text/javascript">
+    function OnBegin() {
+        console.log("This is the OnBegin Callback");
+    }
+
+    function OnSuccess(data) {
+        console.log("This is the OnSuccessCallback: " + data);
+    }
+
+    function OnFailure(request, error) {
+        console.log("This is the OnFailure Callback:" + error);
+    }
+
+    function OnComplete(request, status) {
+        console.log("This is the OnComplete Callback: " + status);
+    }
+</script>
+
 <h2>Get People</h2>
 
 <div id="loading" class="load" style="display:none">
@@ -27,14 +46,14 @@
         </tr>
     </thead>
     <tbody id="tableBody">
-       @Html.Action("GetPeopleData", new { selectedRole = Model})
+        @Html.Action("GetPeopleData", new { selectedRole = Model })
     </tbody>
 </table>
 
 @using (Ajax.BeginForm(ajaxOpts))
 {
     <div>
-        @Html.DropDownList("selectedRole", new SelectList( new[] { "All" }.Concat(Enum.GetNames(typeof(Role)))))
+        @Html.DropDownList("selectedRole", new SelectList(new[] { "All" }.Concat(Enum.GetNames(typeof(Role)))))
         <button type="submit">Submit</button>
     </div>
 }
@@ -43,10 +62,16 @@
     @foreach (string role in Enum.GetNames(typeof(Role)))
     {
         <div class="ajaxLink">
-            @Ajax.ActionLink(role, "GetPeopleData", 
-                new { selectedRole = role }, 
-                new AjaxOptions { UpdateTargetId = "tableBody",
-                Url = Url.Action("GetPeopleData", new { selectedRole = role })
+            @Ajax.ActionLink(role, "GetPeopleData",
+                new { selectedRole = role },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "tableBody",
+                    Url = Url.Action("GetPeopleData", new { selectedRole = role }),
+                    OnBegin = "OnBegin",
+                    OnFailure = "OnFailure",
+                    OnSuccess = "OnSuccess",
+                    OnComplete = "OnComplete"
                 })
         </div>
     }
