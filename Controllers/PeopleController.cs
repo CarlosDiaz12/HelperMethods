@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace HelperMethods.Controllers
 {
-    public class PersonController : Controller
+    public class PeopleController : Controller
     {
         private Person[] personData = {
             new Person {FirstName = "Adam", LastName = "Freeman", Role = Role.Admin},
